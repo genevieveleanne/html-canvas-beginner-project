@@ -7,8 +7,8 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 
-//Prevent rectangle from being stretched if the browser window is resized
-function adjustCircle(event) {
+//Prevents shape from being stretched if the browser window is resized
+function adjustShapeSize(event) {
     event.preventDefault();
 
     canvas.width = window.innerWidth;
@@ -16,15 +16,31 @@ function adjustCircle(event) {
   
 }
 
-window.addEventListener("resize", adjustCircle);
+window.addEventListener("resize", adjustShapeSize);
 
-//Draw a full circle
+//Global X and Y coordinates for mouse movement
+const mouse = {
+    x: undefined,
+    y: undefined,
+}
+
+//Paintbrush Effect
+function moveMouse(event) {
+    event.preventDefault;
+
+    mouse.x = event.x;
+    mouse.y = event.y; 
+
+    drawCircle();
+}
+
+canvas.addEventListener("mousemove", moveMouse)
+
+function drawCircle() {
 context.fillStyle = "blue";
-context.strokeStyle = "red";
-context.lineWidth = 5;
 
 context.beginPath();
-context.arc(100, 100, 50, 0, Math.PI * 2);
+context.arc(mouse.x, mouse.y, 50, 0, Math.PI * 2);
 
 context.fill();
-context.stroke();
+}
