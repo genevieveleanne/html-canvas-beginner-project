@@ -30,8 +30,6 @@ function moveMouse(event) {
 
     mouse.x = event.x;
     mouse.y = event.y; 
-
-    drawCircle();
 }
 
 canvas.addEventListener("mousemove", moveMouse)
@@ -44,3 +42,13 @@ context.arc(mouse.x, mouse.y, 50, 0, Math.PI * 2);
 
 context.fill();
 }
+
+//Continuously clear paintbrush effect from canvas to create an animation loop
+function animate() {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+
+    drawCircle();
+    requestAnimationFrame(animate); 
+}
+
+animate();
